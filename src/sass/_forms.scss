@@ -1,0 +1,26 @@
+.form {
+  width: 100%;
+  &__line {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 100%;
+    margin-bottom: $indent;
+    &--v{
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    &:last-child{
+      margin-bottom: 0px;
+    }
+  }
+  &__label{
+    font-size: 12px;
+    font-weight: 600;
+    color: $DARK-GREY;
+    margin-bottom: 5px;
+    position: absolute;
+    left: 16px;
+    bottom: 100%;
+  }
+}

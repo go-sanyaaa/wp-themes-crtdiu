@@ -1,0 +1,152 @@
+@mixin margin-block($size) {
+  margin-block-start: $size;
+  margin-block-end: $size;
+}
+
+.post--single .post__content {
+  & > *:first-child {
+    margin-top: 0;
+    margin-block-start: 0 !important;
+  }
+  & > *:last-child {
+    margin-bottom: 0;
+    margin-block-end: 0 !important;
+  }
+  p {
+    @extend %text;
+    font-size: 16px;
+    line-height: 26px;
+    @include margin-block(1em)
+  }
+  h1,h2,h3,h4,h5,h6 {
+    @include margin-block(0.8em);
+  }
+  h1 {
+    font-size: 3em;
+  }
+  h2 {
+    font-size: 2.4em;
+  }
+  h3 {
+    font-size: 2em;
+  }
+  h4 {
+    font-size: 1.6em;
+  }
+  h5 {
+    font-size: 1.2em;
+    @include margin-block(1em);
+  }
+  h6 {
+    font-size: 0.8em;
+    @include margin-block(1.1em);
+  }
+
+  pre.wp-block-preformatted{
+    white-space: pre-wrap;
+    &, > *{
+      font-family: Menlo,Consolas,monaco,monospace;
+    }
+  }
+  li {
+    line-height: 1.5;
+    display: list-item;
+    list-style-type: inherit;
+  }
+  ol, ul {
+    padding-inline-start: 40px;
+  }
+  ul {
+    list-style-type: disc;
+  }
+  ul ul, ol ul {
+    list-style-type: circle;
+  }
+  ol ol ul, ol ul ul, ul ol ul, ul ul ul {
+    list-style-type: square;
+  }
+  ol > li {
+    list-style-type: decimal;
+  }
+
+  hr {
+    height: 1px;
+    width: 100%;
+    background: $LIGHT-GREY;
+    @include margin-block(2em);
+  }
+
+  .wp-caption-text{
+    font-size: 14px;
+    font-weight: 600;
+    color: $DARK-GREY;
+  }
+
+  .wp-block-gallery{
+    padding-inline-start: 0;
+    list-style-type: none;
+    margin-bottom: -16px;
+  }
+
+  img {border-radius: 8px;}
+  img.alignright { float: right; margin: 0 0 1em 1em; }
+  img.alignleft { float: left; margin: 0 1em 1em 0; }
+  img.aligncenter { display: block; margin-left: auto; margin-right: auto; }
+  .alignright { float: right; }
+  .alignleft { float: left; }
+  .aligncenter { display: block; margin-left: auto; margin-right: auto; }
+
+  .gallery{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    @include margin-block(2em);
+
+    &-size-thumbnail{
+      width: 100%;
+      .gallery-item{
+        max-height: 150px;
+      }
+    }
+
+    &-size-large{
+
+    }
+
+    .gallery-item{
+      margin: 10px;
+    }
+
+    .gallery-icon{
+      width: 100%;
+      height: 100%;
+      display: flex;
+    }
+
+    .gallery-icon a{
+      width: 100%;
+    }
+    .gallery-icon img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &-columns-2 .gallery-item{
+      width: calc(100% / 12 * 6 - 20px);
+    }
+    &-columns-3 .gallery-item{
+      width: calc(100% / 12 * 4 - 20px);
+    }
+    &-columns-4 .gallery-item{
+      width: calc(100% / 12 * 3 - 20px);
+    }
+    &-columns-5 .gallery-item{
+      width: calc(100% / 10 * 2 - 20px);
+    }
+    &-columns-6 .gallery-item{
+      width: calc(100% / 12 * 2 - 20px);
+    }
+  }
+}

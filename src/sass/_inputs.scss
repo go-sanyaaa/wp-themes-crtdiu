@@ -1,0 +1,26 @@
+.input {
+  display: inline-block;
+  height: 32px;
+  box-sizing: border-box;
+  padding: 3px 20px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  border: 2px solid $LIGHT-GREY;
+  width: 100%;
+  color: $DEEP-BLACK;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 20px;
+  transition: 0.19s;
+  transition-property: border-color;
+  &::placeholder{
+    color: $DARK-GREY;
+    font-weight: 600;
+  }
+  &:hover{
+    border-color: $LIGHT-BLUE;
+  }
+  &:focus{
+    border-color: $DEEP-BLUE;
+  }
+}

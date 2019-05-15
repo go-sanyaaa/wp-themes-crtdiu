@@ -1,0 +1,28 @@
+.tag
+  display: inline-block
+  height: 28px
+  box-sizing: border-box
+  padding: 5px 13px
+  background: #FFF
+  color: $DEEP-BLUE
+  font-weight: 600
+  font-size: 12px
+  line-height: 16px
+  border-radius: 16px
+  border: 2px solid $LIGHT-BLUE
+  transition: 0.3s
+  transition-property: border-color
+
+  &:hover
+    cursor: pointer
+    border-color: transparentize($DEEP-BLUE,.0)
+
+  &-list
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+
+  &-item
+    margin-right: 10px
+    &:last-child
+      margin-right: 0

@@ -1,0 +1,84 @@
+.about
+  &-front
+    flex: 1 0 300px
+    max-width: 600px
+    @media screen and (max-width: 770px)
+      max-width: 100%
+      flex-basis: 100%
+  &-history
+    margin-left: 40px
+    flex: 1 0 200px
+    max-width: 600px
+    @media screen and (max-width: 1200px)
+      margin-left: 30px
+    @media screen and (max-width: 770px)
+      max-width: 100%
+      flex-basis: 100%
+      margin-left: 0
+      margin-top: 30px
+  &__section
+    max-width: 100%
+    margin-bottom: 40px
+    &:last-child
+      margin-bottom: 0
+  &__header
+    font-size: 20px
+    font-weight: 800
+    letter-spacing: 0.02em
+    color: $LIGHT-BLACK
+    margin-bottom: 15px
+  &__p
+    @extend %text
+  &__block
+    display: flex
+    flex-wrap: wrap
+  &__achieve
+    display: flex
+    flex-direction: column
+    align-items: flex-start
+    margin-right: 60px
+    &:last-child
+      margin-right: 0
+  &__achieve-number
+    font-size: 36px
+    font-weight: 800
+    font-style: normal
+    letter-spacing: .03em
+    color: $DEEP-GREEN
+  &__achieve-title
+    font-size: 14px
+    letter-spacing: 0.02em
+    max-width: 160px
+  &__history-link
+    display: flex
+    height: 260px
+    position: relative
+    &:hover .about__history-link-img
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.15)
+    &:hover .about__history-icon
+      transform: translateX(10px)
+    @media screen and (max-width: 1100px)
+      max-height: 500px
+  &__history-header
+    display: flex
+    align-items: center
+    position: absolute
+    top: 40px
+    left: 40px
+  &__history-title
+    font-size: 24px
+    font-weight: 900
+    color: #FFF
+  &__history-icon
+    color: #FFF
+    font-size: 30px
+    margin-left: 15px
+    transition: 0.230s transform
+  &__history-link-img
+    border-radius: 16px
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3))
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0)
+    transition: 0.230s box-shadow
+    width: 100%
+    min-height: 260px
+    background-size: cover

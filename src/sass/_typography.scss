@@ -1,0 +1,40 @@
+//@include font-face("Proxima Nova", "/fonts/Proxima-Nova/style.css");
+//@include font-face("Montserrat", "../../../fonts/Montserrat-Regular/Montserrat-Regular");
+//@include font-face("Montserrat-Light", "../fonts/Montserrat-Light/Montserrat-Light");
+//@include font-face("Montserrat-Bold", "../fonts/Montserrat-Bold/Montserrat-Bold");
+//@include font-face("Montserrat-ExtraBoldItalic", "../fonts/Montserrat-ExtraBoldItalic/Montserrat-ExtraBoldItalic");
+//
+//%font-light {
+//  font-family: 'Montserrat-Light';
+//}
+//%font-bold {
+//  font-family: 'Montserrat-Bold';
+//}
+//%font-extra-bold-italic {
+//  font-family: 'Montserrat-ExtraBoldItalic';
+//}
+
+%text{
+  color: $LIGHT-BLACK;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: justify;
+  letter-spacing: 0.02em;
+}
+
+%headers{
+  font-family: 'Proxima Nova', 'Open Sans', sans-serif;
+}
+
+.text--extrabold{
+  font-weight: 800;
+}
+.text--bold{
+  font-weight: bold;
+}
+.text--regular{
+  font-weight: normal;
+}
+.text--semibold{
+  font-weight: 600;
+}

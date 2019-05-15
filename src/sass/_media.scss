@@ -1,0 +1,100 @@
+
+@media only screen and (max-width : 1200px) {
+
+}
+
+@media only screen and (max-width : 1140px) {
+
+     
+}
+
+@media only screen and (max-width : 992px) {
+    .container {
+        width: 100% !important; 
+        max-width: 100% !important;
+    } 
+    .quotes-img {
+        min-height: 250px;
+    }
+    .delivery-block__img { 
+        width: 80%;
+        height: 90%;
+    }
+} 
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+    .front-categories__more {
+        margin-top: -12px; 
+    }
+
+    .quotes-img {
+        min-height: 200px; 
+    }
+
+        
+} 
+
+
+/* For web-site */
+@media only screen and (max-width : 576px) { 
+    .quotes-img {
+        min-height: 180px;  
+        display: none !important;
+    }
+    .delivery-block__h2 {
+        font-size: 14px; 
+    }
+
+    .delivery-block__img-area {
+        display: none !important;
+    } 
+    .sentence-block__img-area {
+        display: none !important;
+    } 
+}		 
+
+
+
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+    
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px) {
+    
+}
+	
+	
+
+
+
+@media only screen and (min-width : 320px) {
+
+}
+
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+
+}
+
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+
+}
+
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
+}
+

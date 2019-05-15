@@ -1,0 +1,78 @@
+.header
+  width: 100%
+.header__middle, .header__bottom
+  display: flex
+.header__middle
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  padding-top: 30px
+  padding-bottom: 30px
+  @media screen and (max-width: 768px)
+    padding-top: 10px
+    padding-bottom: 10px
+    & .header__logo-img
+      height: 80px
+      width: 80px
+    & .header__title
+      margin-left: 20px
+  @media screen and (max-width: 660px)
+    & .header__title-name
+      font-size: 22px
+      line-height: 26px
+    & .header__title-desc
+      margin-top: 5px
+  @media screen and (max-width: 420px)
+    padding-top: 20px
+    padding-bottom: 20px
+    justify-content: center
+    & .header__logo-box
+      flex-direction: column
+      align-content: center
+      text-align: center
+    & .header__title
+      margin-left: 0
+.header__link
+  display: flex
+  color: $DARK-GREY
+  font-size: 12px
+  font-weight: 600
+  & *
+    font-size: 18px
+    margin-left: 8px
+    color: $DARK-GREY
+.header__bottom
+  align-items: center
+.header-menu__wrapper
+  background: #FEF1F1
+.nav-menu > .menu--horizontal .menu-node > .menu--dropdown
+  left: -20px
+.nav-login
+  display: flex
+.header__logo-box
+  display: flex
+  align-items: center
+.header__logo
+  display: flex
+.header__info-box
+  display: flex
+  flex-direction: column
+  align-items: flex-end
+  justify-content: space-between
+.header__logo-img
+  width: 120px
+  height: 120px
+.header__title
+  margin-left: 40px
+  color: $LIGHT-BLACK
+.header__title-name
+  font-size: 24px
+  font-weight: bold
+.header__title-desc
+  font-size: 16px
+  font-weight: 300
+  margin: 6px 0
+.header__title-meta
+  color: $DARK-GREY
+  font-size: 14px
+  font-weight: 600

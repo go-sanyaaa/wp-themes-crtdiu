@@ -1,0 +1,128 @@
+//@import "pages/pages";
+//@import "mixins/mixins";
+@import "../../fonts/Proxima-Nova/style.css";
+//@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&subset=cyrillic');
+//@import url('https://fonts.googleapis.com/css?family=Alegreya+Sans:100,100i,300,300i,400,400i,500,500i,700,700i,800,800i,900,900i');
+@import "~hooper/dist/hooper.css";
+@import "~vue-loading-overlay/dist/vue-loading.css";
+
+@import "variables";
+@import "colors";
+@import "typography";
+@import "content";
+@import "meta";
+@import "menu";
+@import "modal";
+@import "forms";
+@import "inputs";
+@import "tag";
+@import "buttons";
+@import "sidebar";
+@import "breadcrumbs";
+@import "posts";
+@import "post-styles";
+@import "about";
+@import "comments";
+@import "associations";
+@import "navigation";
+
+@import "alerts";
+@import "header";
+@import "footer";
+//@import "components/EventSlider";
+
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  font-family: 'Proxima Nova', 'Alegreya Sans', sans-serif;
+  outline: none;
+  list-style-type: none;
+  background: none;
+  border: none;
+}
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Proxima Nova', 'Open Sans', sans-serif;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    display: flex;
+    flex: 0 1 auto;
+  }
+
+  &__body {
+    display: flex;
+    flex: 2 0 auto;
+    flex-direction: column;
+  }
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 1320px;
+  box-sizing: border-box;
+  &--h{
+    flex-direction: row;
+  }
+}
+.block {
+  padding-left: 40px;
+  padding-right: 40px;
+  @media screen and (max-width: 1200px){
+    padding-left:30px;
+    padding-right:30px;
+    @media screen and (max-width: 880px) {
+      padding-left: $indent/2;
+      padding-right: $indent/2;
+    }
+  }
+  &--slider {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+.layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.main-content {
+  //flex: 2 0 546px;
+  flex: 2 0 540px;
+  max-width: 840px;
+  @media screen and (max-width: 920px){
+    flex-basis: 400px;
+  }
+  @media screen and (max-width: 770px){
+    flex-basis: 100%;
+  }
+}
+.main-sidebar {
+  //flex: 1 0 260px;
+  flex: 1 0 240px;
+  max-width: 400px;
+  box-sizing: border-box;
+  padding-left: 40px;
+  @media screen and (max-width: 770px){
+    flex-basis: 100%;
+    padding-left: 0;
+  }
+}
+
+
+.text--red{
+  color: $DEEP-RED !important;
+}
+
+.wpmm-menu{
+  z-index: 10 !important;
+}
+
+

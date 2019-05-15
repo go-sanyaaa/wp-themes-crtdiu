@@ -1,0 +1,44 @@
+.content
+  display: flex
+  flex-direction: column
+  width: 100%
+  padding: 30px 0
+  &__wrapper
+    margin-bottom: 30px
+    &:last-child
+      margin-bottom: 0
+  &__header
+    margin-bottom: 30px
+  &__body
+    position: relative
+  &__title
+    font-size: 18px
+    font-weight: 300
+    color: $DARK-GREY
+  //& > *
+  //  margin-bottom: 30px
+  //& > :last-child
+  //  margin-bottom: 0px
+  &__grid
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+  &__grid-col
+    display: flex
+    flex-shrink: 1
+    margin: 0
+    box-sizing: border-box
+    &:not(:first-child)
+      padding-left: 40px
+      @media screen and (max-width: 1360px)
+        padding-left: 20px
+    &-2
+      flex-basis: 65%
+      flex-grow: 2
+      @media screen and (max-width: 1200px)
+        flex-basis: 100%
+    &-1
+      flex-basis: 35%
+      flex-grow: 1
+      @media screen and (max-width: 1100px)
+        flex-basis: 100%

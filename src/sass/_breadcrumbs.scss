@@ -1,0 +1,32 @@
+.breadcrumbs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  padding: 8px 20px;
+  background: #f4f4f4;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  &__sep{
+    color: $LIGHT-TEXT;
+    font-size: 12px;
+    margin: 0 15px;
+  }
+  &__list-link{
+    display: flex;
+    color: $LIGHT-TEXT;
+    font-size: 13px;
+    font-weight: bold;
+    transition: 0.19s color;
+    &:hover{
+      color: $DEEP-BLACK;
+      text-decoration: underline;
+    }
+  }
+  &__title{
+    color: $DARK-GREY;
+    font-size: 13px;
+    font-weight: bold;
+  }
+}
