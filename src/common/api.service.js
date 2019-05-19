@@ -9,20 +9,18 @@ const ApiService = {
 
     setHeader() {
         axios.defaults.headers.common["Authentication"] = `${JwtService.getToken()}`;
-        console.log(axios.defaults.headers.common["Authentication"]);
     },
 
     get(resource, params = {}) {
-        // return axios.get(`${resource}${params}`).catch(error => {
-        //     throw new Error(`[RWV] ApiService ${error}`);
-        // });
         return axios.get(resource,{params}).catch(error => {
             throw new Error(`ApiService ${error}`);
         });
     },
 
     post(resource, params) {
-        return axios.post(`${resource}`, params);
+        return axios.post(resource, params).catch(error=>{
+            throw new Error(`ApiService ${error}`)
+        });
     },
 
     delete(resource){

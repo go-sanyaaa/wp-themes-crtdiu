@@ -65,16 +65,12 @@ const actions = {
         return new Promise((res,rej)=>{
             ApiService.post('wp/v2/users/me')
                 .then(resp => {
-                    const {id,first_name,last_name,email, avatar_urls, username} = resp.data;
-                    const user = {
+                    const {id,name,email, avatar_urls, username} = resp.data;
+                    context.commit(SET_USER,{
                         id,
-                        first_name,
-                        last_name,
-                        email,
+                        name,
                         avatar_urls,
-                        username
-                    }
-                    context.commit(SET_USER,user)
+                    })
                     res(resp)
                 })
         })
@@ -84,18 +80,13 @@ const actions = {
             ApiService.setHeader()
             ApiService.post('/aam/v1/validate-jwt',{jwt:token})
                 .then(resp => {
-                    console.log(resp)
                     if(resp.data.status == 'valid'){
                         context.commit(SET_TOKEN,token)
                         res(resp)
-                    }else{
-                        context.commit(PURGE_AUTH)
-                        rej(err)
                     }
                 })
                 .catch(err => {
                     context.commit(PURGE_AUTH)
-                    rej(err)
                 })
         })
     },
