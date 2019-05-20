@@ -26,7 +26,6 @@
                                                 | {{getHumanDate(event.event_date,"LT")}} - {{getHumanDate(event.event_date_end,"LT")}}
                                 div.event-nested__more-box(v-if="saturdayEvents.length > 2")
                                     a.event-nested__more-link Просмотреть другие события...
-                            div.event__actions
                         template(v-else)
                             c-alert(:closed="false" @ok="this.console.log('Heelo')")
                                 template К сожалению на этой неделе нет других запланированных событий. Перейдите по ссылке ниже чтобы просмотреть все события
@@ -108,7 +107,6 @@
                 return moment(date).locale('ru').format(format)
             },
             eventHasCome(event){
-                console.log("Hello")
                 return moment().isAfter(event.event_date_end)
             },
         },
@@ -162,7 +160,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        margin-top: 30px;
+        margin-top: 15px;
     }
     .event-slider__btn{
         display: flex;
@@ -191,7 +189,7 @@
         width: 100%;
     }
     .hooper {
-        margin-bottom: 30px;
+        /*margin-bottom: 30px;*/
     }
     .event-slider__hooper-pagination{
         /*top: 100%;*/
@@ -278,9 +276,6 @@
                 color: $DEEP-GREEN;
                 text-decoration: underline;
             }
-        }
-        &:last-child{
-            margin-bottom: 0;
         }
         &__name{
             font-size: 16px;

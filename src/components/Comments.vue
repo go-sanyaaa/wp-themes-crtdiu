@@ -1,5 +1,5 @@
 <template lang="pug">
-    div.post__container.comments__container
+    div#comments.post__container.comments__container
         div.content__header(:style="{marginBottom: commentsCount > 0 ? '30px' : '0px'}")
             h2.content__title Комментарии: {{commentsCount}}
         div.content__body
@@ -97,14 +97,25 @@
             margin-bottom: 0;
         }
         &__children{
+            position: relative;
             margin-top: 20px;
-            margin-left: 60px;
+            padding-left: 60px;
             > *{
                 margin-bottom: 30px;
             }
 
             > *:last-child{
                 margin-bottom: 0;
+            }
+            &:before{
+                content: "";
+                display: flex;
+                position: absolute;
+                width: 4px;
+                height: 100%;
+                background: #F1F1F1f1;
+                left: 28px;
+                border-radius: 2px;
             }
         }
 
@@ -115,8 +126,10 @@
         }
 
         &__body{
+            position: relative;
             display: flex;
             flex-direction: row;
+            align-items: flex-start;
         }
 
         &__more{
@@ -142,7 +155,8 @@
         }
 
         &__data{
-            flex: 1 0 auto;
+            position: relative;
+            flex: 1 1 auto;
             display: flex;
             flex-direction: column;
         }
@@ -153,6 +167,7 @@
             font-size: 14px;
         }
         &__avatar{
+            display: flex;
             margin-right: 20px;
             &-img{
                 width: 60px;
@@ -180,6 +195,31 @@
             padding: 12px 20px;
             box-sizing: border-box;
             border-radius: 8px;
+        }
+        @media screen and (max-width: 768px){
+            &__avatar{
+                position: relative;
+                z-index: 1;
+                margin-right: 10px;
+                &-img{
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+            &__data{
+                position: relative;
+                left: -50px;
+                flex: 1 0 100%;
+            }
+            &__infobar{
+                margin-left: 50px;
+            }
+            &__children{
+                padding-left: 40px;
+                &:before{
+                    left: 18px;
+                }
+            }
         }
     }
 </style>

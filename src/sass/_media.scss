@@ -8,18 +8,8 @@
      
 }
 
-@media only screen and (max-width : 992px) {
-    .container {
-        width: 100% !important; 
-        max-width: 100% !important;
-    } 
-    .quotes-img {
-        min-height: 250px;
-    }
-    .delivery-block__img { 
-        width: 80%;
-        height: 90%;
-    }
+@media only screen and (max-width : 800px) {
+
 } 
 
 /* Small Devices, Tablets */

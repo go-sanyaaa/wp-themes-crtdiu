@@ -82,7 +82,7 @@ class Kama_Breadcrumbs {
 
             // Разметка по умолчанию
             if( ! $mark ) $mark = array(
-                'wrappatt'  => '<div class="breadcrumbs">%s</div>',
+                'wrappatt'  => '<div class="breadcrumbs__wrapper"><div class="breadcrumbs">%s</div></div>',
                 'linkpatt'  => '<a href="%s">%s</a>',
                 'sep_after' => '',
             );
@@ -94,7 +94,7 @@ class Kama_Breadcrumbs {
             );
             // schema.org
             elseif( $mark === 'schema.org' ) $mark = array(
-                'wrappatt'   => '<div class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">%s</div>',
+                'wrappatt'   => '<div class="breadcrumbs__wrapper"><div class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">%s</div></div>',
                 'linkpatt'   => '<span class="breadcrumbs__list-el" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a class="breadcrumbs__list-link" href="%s" itemprop="item"><span class="breadcrumbs__list-name" itemprop="name">%s</span></a></span>',
                 'sep_after'  => '',
             );

@@ -16,6 +16,7 @@
     &-img {
       width: 100%;
       height: 100%;
+      max-height: 300px;
       object-fit: cover;
     }
   }
@@ -122,7 +123,6 @@
 
   &__footer{
     display: flex;
-    height: 30px;
   }
 }
 .post__infopanel{
@@ -167,6 +167,11 @@
       color: $DEEP-BLUE
     }
   }
+  &__link{
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
 }
 .post-info__icon{
   font-size: 18px;
@@ -175,3 +180,47 @@
 .post-info__icon-comments{
   margin-right: 5px;
 }
+
+@media screen and (max-width: 1200px){
+  .post{
+    &--item {
+      margin-bottom: 30px;
+      &:last-child{
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 880px){
+  .post{
+    &--item {
+      margin-bottom: 20px;
+      &:last-child{
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px){
+  .post--single {
+    .post__container{
+      padding: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 420px){
+  .post--item{
+    .post__thumbnail{
+      max-height: 200px;
+    }
+  }
+  .post-link{
+    display: none;
+  }
+}
+
+
+

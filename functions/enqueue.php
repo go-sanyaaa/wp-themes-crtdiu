@@ -10,7 +10,7 @@ define( 'CRTDIU_URL', get_template_directory_uri() );
  */
 add_action( 'wp_enqueue_scripts', function() {
 
-	// JS 
+	// JS
 	wp_enqueue_script( 
 		'app_js',
 		//HEISENBERG_URL . "/dist/build{$min_ext}.js",
@@ -34,5 +34,6 @@ add_action( 'wp_enqueue_scripts', function() {
 		null,
         rand(111,9999)
 	);
+
 
 } );

@@ -10,20 +10,21 @@
                     :class="[catId == category.id ? 'active-cat' : '']"
                     :href="`/events/${category.slug}`"
                 ) {{category.name}}
-            div.events__filters
-                div.events__filter-tabs
-                    button.events-filter-tab(
-                        v-for="(filter,i) in filters"
-                        :class="[activeFilter == i ? 'events-filter-tab--active' : '']"
-                        @click="setFilter(i)"
-                    ) {{filter.name}}
-                //div.events__filter
-                    date-picker(v-model="startDate" lang="ru" :not-after="endDate" :width="140" :first-day-of-week="1")
-                        template(slot="calendar-icon")
-                            i.far.fa-calendar-alt
-                    date-picker(v-model="endDate" lang="ru" :not-before="startDate" :width="140" :first-day-of-week="1")
-                        template(slot="calendar-icon")
-                            i.far.fa-calendar-alt
+            div.events__filters-wrapper
+                div.events__filters
+                    div.events__filter-tabs
+                        button.events-filter-tab(
+                            v-for="(filter,i) in filters"
+                            :class="[activeFilter == i ? 'events-filter-tab--active' : '']"
+                            @click="setFilter(i)"
+                        ) {{filter.name}}
+                    //div.events__filter
+                        date-picker(v-model="startDate" lang="ru" :not-after="endDate" :width="140" :first-day-of-week="1")
+                            template(slot="calendar-icon")
+                                i.far.fa-calendar-alt
+                        date-picker(v-model="endDate" lang="ru" :not-before="startDate" :width="140" :first-day-of-week="1")
+                            template(slot="calendar-icon")
+                                i.far.fa-calendar-alt
             div.events__list
                 loading(:active="isFetch" v-if="isFetch" :is-full-page="false" color="#FF0331" loader="dots" background-color="#fff" :opacity="1")
                 c-event-card(v-else v-for="event in events" :event="event" :key="`event-card-${event.id}`")
@@ -139,10 +140,23 @@
                 margin-bottom: 0;
             }
         }
+        &__filters-wrapper{
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr;
+        }
         &__filters{
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            white-space: nowrap;
+            overflow-x: scroll;
+            margin-top: -15px;
+            padding-top: 15px;
+            border-radius: 8px;
+            &::-webkit-scrollbar {
+              display: none;
+            }
         }
         &__filter-tabs{
             > * {
@@ -191,6 +205,16 @@
             color: $LIGHT-TEXT;
             font-weight: 600;
             border-color: $DEEP-BLUE;
+        }
+    }
+    @media screen and (max-width: 1200px){
+        .events__list{
+            margin-bottom: 0;
+        }
+    }
+    @media screen and (max-width: 768px){
+        .events__filters{
+            box-shadow: inset 10px 0px 10px 0px #ececec, inset -10px 0px 10px 0px #ececec;
         }
     }
 </style>

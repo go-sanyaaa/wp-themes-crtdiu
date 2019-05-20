@@ -18,9 +18,7 @@ const ApiService = {
     },
 
     post(resource, params) {
-        return axios.post(resource, params).catch(error=>{
-            throw new Error(`ApiService ${error}`)
-        });
+        return axios.post(resource, params)
     },
 
     delete(resource){

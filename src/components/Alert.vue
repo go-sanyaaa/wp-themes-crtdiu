@@ -1,6 +1,7 @@
 <template lang="pug">
     div.alert(:class="`alert--${type}`")
-        slot(name="header")
+        div.alert__header
+            slot(name="header")
         p.alert__message
             slot Добавьте текст уведомлению
         div.alert__actions(v-if="actions")
@@ -32,7 +33,7 @@
     .alert{
         box-sizing: border-box;
         width: 100%;
-        padding: 20px;
+        padding: 15px;
         border-radius: 8px;
 
 
@@ -64,7 +65,7 @@
 
         &__button{
             color: $LIGHT-BLACK;
-            font-weight: 900;
+            font-weight: 800;
             font-size: 14px;
             letter-spacing: .02em;
             background: $LIGHT-BLUE;
@@ -78,12 +79,25 @@
             .alert__message{
                 color: #FFF;
             }
+            .alert__button{
+                color: #FFF;
+                background: $LIGHT-RED;
+            }
+            .alert__header{
+                color: #FFF;
+            }
         }
 
         &--success{
             background-color: $DEEP-GREEN;
             .alert__message{
                 color: #FFF;
+            }
+            .alert__header{
+                color: #FFF;
+            }
+            .alert__button{
+                background: $LIGHT-GREEN;
             }
         }
 

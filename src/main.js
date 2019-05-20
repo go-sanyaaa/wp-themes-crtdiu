@@ -8,9 +8,11 @@ import EventSlider from './components/EventSlider.vue'
 // import EventSubscribe from './components/EventSubscribe'
 import cEventPost from './components/cEventPost'
 import Auth from './components/Auth'
+import cSignUp from './components/cSignUp'
 import cAssocReq from './components/cAssocReq'
 import Comments from './components/Comments'
 import cEventsArchive from './components/cEventsArchive'
+import cTimer from './components/cTimer'
 
 import Alert from './components/Alert'
 
@@ -49,15 +51,13 @@ const app = new Vue({
     components: {
         EventSlider,
         Auth,
+        cSignUp,
         Comments,
         Alert,
         cEventPost,
         cEventsArchive,
-        cAssocReq
-    },
-    mounted(){
-        console.log(this.$refs['main-menu'].clientWidth)
-        console.log(this.$refs['menu-wrapper'].offsetWidth)
+        cAssocReq,
+        cTimer
     },
     store
 }).$mount('#app')

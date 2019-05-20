@@ -74,14 +74,6 @@ h1,h2,h3,h4,h5,h6 {
 .block {
   padding-left: 40px;
   padding-right: 40px;
-  @media screen and (max-width: 1200px){
-    padding-left:30px;
-    padding-right:30px;
-    @media screen and (max-width: 880px) {
-      padding-left: $indent/2;
-      padding-right: $indent/2;
-    }
-  }
   &--slider {
     padding-left: 20px;
     padding-right: 20px;
@@ -105,15 +97,10 @@ h1,h2,h3,h4,h5,h6 {
   }
 }
 .main-sidebar {
-  //flex: 1 0 260px;
   flex: 1 0 240px;
   max-width: 400px;
   box-sizing: border-box;
   padding-left: 40px;
-  @media screen and (max-width: 770px){
-    flex-basis: 100%;
-    padding-left: 0;
-  }
 }
 
 
@@ -125,4 +112,37 @@ h1,h2,h3,h4,h5,h6 {
   z-index: 10 !important;
 }
 
+@media screen and (max-width: 1200px){
+  .block{
+    padding-left:30px;
+    padding-right:30px;
+    &--slider{
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+  .main-sidebar{
+    padding-left: 30px;
+  }
+}
+@media screen and (max-width: 880px) {
+  .block{
+    padding-left: $indent/2;
+    padding-right: $indent/2;
+    &--slider{
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  .main-sidebar{
+    padding-left: 20px;
+  }
+}
+@media screen and (max-width: 770px){
+  .main-sidebar{
+    max-width: 100%;
+    flex-basis: 100%;
+    padding-left: 0;
+  }
+}
 

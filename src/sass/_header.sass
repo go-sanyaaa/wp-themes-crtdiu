@@ -8,30 +8,6 @@
   justify-content: space-between
   padding-top: 30px
   padding-bottom: 30px
-  @media screen and (max-width: 768px)
-    padding-top: 10px
-    padding-bottom: 10px
-    & .header__logo-img
-      height: 80px
-      width: 80px
-    & .header__title
-      margin-left: 20px
-  @media screen and (max-width: 660px)
-    & .header__title-name
-      font-size: 22px
-      line-height: 26px
-    & .header__title-desc
-      margin-top: 5px
-  @media screen and (max-width: 420px)
-    padding-top: 20px
-    padding-bottom: 20px
-    justify-content: center
-    & .header__logo-box
-      flex-direction: column
-      align-content: center
-      text-align: center
-    & .header__title
-      margin-left: 0
 .header__link
   display: flex
   color: $DARK-GREY
@@ -45,6 +21,15 @@
   align-items: center
 .header-menu__wrapper
   background: #FEF1F1
+.header-menu__button
+  display: none
+  align-items: center
+  font-size: 16px
+  font-weight: bold
+  color: $DARK-GREY
+  &-icon
+    margin-right: 8px
+    font-size: 22px
 .nav-menu > .menu--horizontal .menu-node > .menu--dropdown
   left: -20px
 .nav-login
@@ -76,3 +61,79 @@
   color: $DARK-GREY
   font-size: 14px
   font-weight: 600
+.header__bvi-button
+  display: flex
+  align-items: center
+
+@media screen and (max-width: 768px)
+  .header__middle
+    padding-top: 10px
+    padding-bottom: 10px
+    & .header__logo-img
+      height: 100px
+      width: 100px
+    & .header__title
+      margin-left: 20px
+    & .header__title-name
+      font-size: 16px
+      line-height: 26px
+    & .header__title-desc
+      font-size: 14px
+      font-weight: normal
+      margin-top: 5px
+    & .header__title-meta
+      font-size: 12px
+  .header-menu__button
+    display: flex
+  .header-menu__wrapper
+    display: none
+  .header__middle
+    flex-wrap: wrap
+  .header-menu__button
+    margin: 20px 0
+  .header__info-box
+    width: 100%
+    flex-direction: row-reverse
+    align-items: center
+    flex-wrap: wrap-reverse
+  .header__bvi
+    width: 100% !important
+  .header__bvi-button
+    width: auto
+    display: flex
+    justify-content: center
+    background: black
+    color: #FFF
+    padding: 10px 15px
+    border-radius: 8px
+//@media screen and (max-width: 420px)
+//  .header__middle
+//    padding-top: 20px
+//    padding-bottom: 20px
+//    justify-content: center
+//    & .header__logo-box
+//      flex-direction: column
+//      align-content: center
+//      text-align: center
+//    & .header__title
+//      margin-left: 0
+@media screen and (max-width: 420px)
+  .header__middle
+    padding-top: 10px
+    padding-bottom: 10px
+    & .header__logo-img
+      height: 80px
+      width: 80px
+    & .header__title
+      margin-left: 20px
+    & .header__title-name
+      font-size: 14px
+      line-height: 18px
+    & .header__title-desc
+      font-size: 12px
+      font-weight: normal
+      margin-top: 5px
+    & .header__title-meta
+      font-size: 11px
+    .header__logo-box
+      margin-top: 10px

@@ -7,7 +7,7 @@ class CRTDIU_Widget_Search extends WP_Widget {
             'classname' => 'crtdiu_widget_search',
             'description' => 'Поисковая форма'
         );
-        parent::__construct( 'crtdiu_search', 'Виджет поиска', $widget_ops );
+        parent::__construct( 'crtdiu_search', 'ЦРТДиЮ Поиск по сайту', $widget_ops );
     }
 
     public function widget( $args, $instance ) {

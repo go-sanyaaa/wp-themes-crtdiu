@@ -36,8 +36,10 @@
                             <?php the_category(', ','multiple'); ?>
                         </div>
                         <div class="post-info post-info__comments">
-                            <i class="far fa-comment post-info__icon post-info__icon-comments"></i>
-                            Комментарии: <a href="<?= get_the_permalink(); ?>#comments" class="post-info__link"><?= ' '.get_comments_number() ?></a>
+                            <a href="<?= get_the_permalink(); ?>#comments" class="post-info__link">
+                                <i class="far fa-comment post-info__icon post-info__icon-comments"></i>
+                                Комментарии: <?= ' '.get_comments_number() ?>
+                            </a>
                         </div>
                     </div>
                     <a href="<?= get_the_permalink(); ?>" class="post-link">Перейти</a>

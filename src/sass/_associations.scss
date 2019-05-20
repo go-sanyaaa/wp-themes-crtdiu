@@ -9,15 +9,12 @@
     padding: 30px;
     background: #f4f4f4;
     border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.0);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.0);
     transition: .19s box-shadow;
-    z-index: 100;
-    &:nth-child(4n-1), &:nth-child(4n-2){
-      background: #FFF;
-    }
+    z-index: 1;
     &:hover{
       z-index: 200;
-      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
       .associations__title,.associations__link-more{
         color: $DEEP-BLUE;
       }
@@ -119,5 +116,25 @@
 
   &__desc{
     @extend %text
+  }
+}
+
+@media screen and (min-width: 880px){
+  .associations{
+    &__item{
+      &:nth-child(4n-1), &:nth-child(4n-2){
+        background: #FFF;
+      }
+    }
+  }
+}
+@media screen and (max-width: 880px){
+  .associations{
+    &__item{
+      flex-basis: 100%;
+      &:nth-child(2n){
+        background: #FFF;
+      }
+    }
   }
 }

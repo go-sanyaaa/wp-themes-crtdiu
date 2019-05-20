@@ -202,10 +202,20 @@
             animation-duration: 2s;
             animation-iteration-count: infinite;
         }
+        @media screen and (max-width: 1200px){
+            margin: 0 30px 30px 0;
+            width: calc(50% - 15px);
+        }
+        @media screen and (max-width: 880px){
+            margin-bottom: 20px;
+            width: 100%;
+            margin-right: 0;
+        }
     }
     @keyframes blink {
         50% {
             opacity: 0;
         }
     }
+
 </style>

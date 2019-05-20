@@ -22,4 +22,15 @@ function crtdiu_sidebars_init(){
         'before_title' => '<h2 class="widget-title">',
         'after_title' => '</h2><hr class="widget-hr">'
     ]);
+
+    register_sidebar([
+        'name' => 'Шапка сайта',
+        'id' => 'header',
+        'class' => 'header-sidebar',
+        'description' => 'Сайдбар над кнопкой войти в шапке сайта',
+//        'before_widget' => '<div id="%1$s" class="%2$s widget  widget--footer">',
+//        'after_widget' => '</div>',
+//        'before_title' => '<h2 class="widget-title">',
+//        'after_title' => '</h2><hr class="widget-hr">'
+    ]);
 }

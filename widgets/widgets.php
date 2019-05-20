@@ -3,6 +3,7 @@ require_once __DIR__ . '/widgets-about.php';
 require_once __DIR__ . '/widget-search.php';
 require_once __DIR__ . '/widget-social-networks.php';
 require_once __DIR__ . '/widget-req-assoc.php';
+require_once __DIR__ . '/widget-kuzbass.php';
 
 add_action('widgets_init','crtdiu_widgets_init');
 function crtdiu_widgets_init(){
@@ -32,6 +33,6 @@ function crtdiu_widgets_init(){
     register_widget('crtdiu_widget_search');
     register_widget('crtdiu_widget_social_networks');
     register_widget('crtdiu_widget_req_assoc');
-
+    register_widget('crtdiu_widget_kuzbass');
 }
 

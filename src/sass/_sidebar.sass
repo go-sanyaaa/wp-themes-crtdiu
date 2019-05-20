@@ -33,6 +33,7 @@
       font-weight: bold
       padding: 6px 20px
       border-radius: 16px
+      background: $DEEP-BLUE
       color: #FFF
       transition: 0.19s background-color
       white-space: nowrap
@@ -44,6 +45,10 @@
         background-color: #ED812B
         &:hover
           background-color: transparentize(#ED812B,0.1)
+      &--inst
+        background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)
+        &:hover
+          background: linear-gradient(45deg, rgba(240, 148, 51, 0.9) 0%, rgba(230, 104, 60, 0.9) 25%, rgba(220, 39, 67, 0.9) 50%, rgba(204, 35, 102, 0.9) 75%,#bc1888 100%)
     &__icon
       font-size: 16px
       margin-left: 8px
@@ -97,3 +102,11 @@
     .menu-link
       color: $LIGHT-TEXT
       font-weight: normal
+
+@media screen and (max-width: 1200px)
+  .sidebar
+    padding: 30px 20px
+
+@media screen and (max-width: 1080px)
+  .sidebar
+    padding: 30px 15px

@@ -56,7 +56,6 @@
                     Object.assign(comment_data,{author_name,author_email})
                 }
 
-                console.log(comment_data)
                 this.$store.dispatch(CREATE_COMMENT,comment_data)
                     .then((resp)=>{
                         console.log(resp)
