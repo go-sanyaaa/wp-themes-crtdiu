@@ -3,8 +3,9 @@
         div.comment__header
             h1.comment__title Добавить комментарий
             button.comments__cancel.button.button--red.button--small(v-if="parent" @click.prevent="cancelComment") отменить
-        div.comment__message.alert(v-if="Object.entries(message).length && message.status" :class="`alert--${message.status}`")
-            p.alert__message {{message.content}}
+        c-alert(:type="message.status" v-if="Object.entries(message).length && message.status" @ok="hideAlert")
+            //template(v-if="message.status == 'success'" v-slot:header) Учетная запись создана
+            template {{message.content}}
         div.comment__form-wrapper(ref="formWrapper")
             form#comment-form.comment__form(@submit.prevent="createComment")
                 div.comment__form-col.comment__form-userdata(v-if='!isAuthenticated')
@@ -25,9 +26,11 @@
 <script>
     import {CREATE_COMMENT, FETCH_COMMENTS} from "../store/actions.type";
     import {mapGetters} from 'vuex'
+    import CAlert from "./Alert";
 
     export default {
         name: "CommentForm",
+        components: {CAlert},
         props: ['post','parent'],
         data(){
             return {
@@ -58,14 +61,12 @@
 
                 this.$store.dispatch(CREATE_COMMENT,comment_data)
                     .then((resp)=>{
-                        console.log(resp)
                         this.parseMessage(resp)
                         this.comment = ''
                         this.$store.dispatch(FETCH_COMMENTS,{post_id:post,page_id:1})
                         loader.hide()
                     })
                     .catch(err => {
-                        console.log(err.response)
                         this.parseMessage(err.response)
                         loader.hide()
                     })
@@ -80,6 +81,12 @@
                 }else if(resp.status == '201'){
                     this.message.status = 'success'
                     this.message.content = resp.data.status == 'approved' ? approved : hold;
+                }
+            },
+            hideAlert(){
+                this.message = {
+                    status: '',
+                    content: ''
                 }
             }
         },
@@ -118,6 +125,7 @@
         position: relative;
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
         &-wrapper{
             position: relative;
         }
@@ -160,5 +168,14 @@
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
+    }
+    @media screen and (max-width: 1024px){
+        .comment__form-col{
+            margin-right: 0;
+            flex-basis: 100%;
+        }
+        .comment__form-userdata{
+            margin-bottom: 20px;
+        }
     }
 </style>

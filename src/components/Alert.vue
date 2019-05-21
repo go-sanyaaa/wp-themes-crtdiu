@@ -1,6 +1,6 @@
 <template lang="pug">
     div.alert(:class="`alert--${type}`")
-        div.alert__header
+        div.alert__header(v-if="headerIsSet")
             slot(name="header")
         p.alert__message
             slot Добавьте текст уведомлению
@@ -23,6 +23,11 @@
             closed: {
                 type: Boolean,
                 default: true
+            }
+        },
+        computed:{
+            headerIsSet(){
+                return this.$slots.hasOwnProperty('header')
             }
         },
         name: "c-alert"
@@ -72,6 +77,7 @@
             border-radius: 8px;
             padding: 6px 20px;
             height: 30px;
+            cursor: pointer;
         }
 
         &--error{

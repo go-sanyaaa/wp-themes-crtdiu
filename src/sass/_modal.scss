@@ -32,3 +32,16 @@
     top: 20px;
   }
 }
+@media screen and (max-width: 768px){
+  .modal{
+    padding: 40px;
+    &__body{
+      max-width: none;
+    }
+  }
+}
+@media screen and (max-width: 480px){
+  .modal{
+    padding: 40px 20px;
+  }
+}

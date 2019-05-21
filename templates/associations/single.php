@@ -11,10 +11,7 @@
                     <p class="associations__desc"><?= get_the_excerpt();?></p>
                 </div>
                 <div class="associations__links">
-                    <button class="button button--red">
-                        Подать заявку
-                        <i class="fas fa-plus button-icon"></i>
-                    </button>
+                    <c-assoc-rec :assoc-name="`<?= get_the_title();?>`" :assoc-id="<?=get_the_ID()?>"></c-assoc-rec>
                 </div>
             </div>
         </figure>

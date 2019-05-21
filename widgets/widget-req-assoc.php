@@ -21,7 +21,7 @@ class CRTDIU_Widget_Req_Assoc extends WP_Widget {
         }
         list('icon' => $icon, 'name' => $name, 'desc' => $desc) = $instance;
 
-        echo '<c-assoc-req link-icon="'.$icon.'" link-name="'.$name.'" link-desc="'.$desc.'"></c-assoc-req>';
+        echo '<c-assoc-rec-widget link-icon="'.$icon.'" link-name="'.$name.'" link-desc="'.$desc.'"></c-assoc-rec-widget>';
 
         echo $args['after_widget'];
     }

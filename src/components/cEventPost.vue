@@ -4,8 +4,15 @@
         template(v-else)
             v-dialog
             figure.event__thumbnail
-                img.event__thumbnail-img(:src="getPostImages(event)")
-            div.event__container
+                img.event__thumbnail-img(:src="getPostImages(event)" :class="eventHasCome && !eventOnline ? 'event__thumbnail-img--completed' : ''")
+                div.event__status(v-if="(!eventHasCome && eventOnline) || eventHasCome"
+                    :class="eventOnline ? 'event__status--online' : 'event__status--completed'")
+                    template(v-if="eventOnline")
+                        span.event__status-icon
+                        | Сейчас идет
+                    template(v-else)
+                        | Завершено
+            div.event__container.post__container
                 header.post__header
                     div.event__cats.tag-list
                         a.tag-item.tag(
@@ -17,10 +24,10 @@
                         div.event__meta.meta
                             span.meta__field.meta__field--chips.meta__field--blue
                                 | {{getHumanDate(event.event_date,"LL")}}
-                            span.meta__field.meta__field--chips(:class="eventHasCome ? 'meta__field--red' : '' ")
+                            span.meta__field.meta__field--chips(:class="eventHasCome && false ? 'meta__field--red' : '' ")
                                 i.fas.fa-clock.meta__icon
                                 | {{getHumanDate(event.event_date,"LT")}} - {{getHumanDate(event.event_date_end,"LT")}}
-                                template(v-if="eventHasCome")
+                                //template(v-if="eventHasCome")
                                     span.meta__subtext Завершено
                             span.meta__field
                                 i.fas.fa-users.meta__icon
@@ -71,6 +78,9 @@
             eventHasCome(){
                 return moment().isAfter(this.event.event_date_end)
             },
+            eventOnline(){
+                return moment().isBetween(this.event.event_date, this.event.event_date_end)
+            }
         },
         methods:{
             getPostImages(post){
@@ -100,6 +110,7 @@
         display: flex;
         min-height: 100px;
         &__thumbnail {
+            position: relative;
             display: flex;
             width: 100%;
             max-height: 300px;
@@ -112,23 +123,61 @@
                 height: 100%;
                 object-fit: cover;
             }
+            &-img--completed {
+                filter: grayscale(1);
+            }
+        }
+        &__status{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 20px 20px;
+            height: 100%;
+            box-sizing: border-box;
+            font-size: 15px;
+            font-weight: bold;
+            &-icon{
+                display: flex;
+                width: 8px;
+                height: 8px;
+                background: red;
+                border-radius: 50%;
+                margin-right: 6px;
+                animation-name: blink;
+                animation-timing-function: linear;
+                animation-duration: 2s;
+                animation-iteration-count: infinite;
+            }
+            &--online{
+                color: red;
+                background: transparentize(#FFF,.3);
+            }
+            &--completed{
+                background: transparentize($DEEP-RED,.5);
+                color: #FFF;
+            }
         }
     }
 
     .event--single .event {
-        &__container{
-            width: 100%;
-            max-width: 840px;
-            box-sizing: border-box;
-            margin: 30px auto;
-            padding: 0 40px;
-            > *{
-                margin-bottom: 30px;
-            }
-            > :last-child{
-                margin-bottom: 0;
-            }
-        }
+        /*&__container{*/
+        /*    width: 100%;*/
+        /*    max-width: 840px;*/
+        /*    box-sizing: border-box;*/
+        /*    margin: 30px auto;*/
+        /*    padding: 0 40px;*/
+        /*    > *{*/
+        /*        margin-bottom: 30px;*/
+        /*    }*/
+        /*    > :last-child{*/
+        /*        margin-bottom: 0;*/
+        /*    }*/
+        /*}*/
         &__cats{
             margin-bottom: 8px;
         }
@@ -136,6 +185,7 @@
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            flex-wrap: wrap;
             margin: 20px 0;
         }
         &__meta{
@@ -147,4 +197,13 @@
             font-size: 24px;
         }
     }
+    @media screen and (max-width: 580px){
+        .event--single .event{
+            &__actions{
+                flex-basis: 100%;
+                margin-top: 15px;
+            }
+        }
+    }
+
 </style>

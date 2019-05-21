@@ -9,10 +9,12 @@ import EventSlider from './components/EventSlider.vue'
 import cEventPost from './components/cEventPost'
 import Auth from './components/Auth'
 import cSignUp from './components/cSignUp'
-import cAssocReq from './components/cAssocReq'
+import cAssocRecWidget from './components/cAssocRecWidget'
+import cAssocRec from './components/cAssocRec'
 import Comments from './components/Comments'
 import cEventsArchive from './components/cEventsArchive'
 import cTimer from './components/cTimer'
+import cModal from './components/cModal'
 
 import Alert from './components/Alert'
 
@@ -56,8 +58,10 @@ const app = new Vue({
         Alert,
         cEventPost,
         cEventsArchive,
-        cAssocReq,
-        cTimer
+        cAssocRecWidget,
+        cAssocRec,
+        cTimer,
+        cModal
     },
     store
 }).$mount('#app')

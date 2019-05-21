@@ -56,11 +56,14 @@
                 startDate: '',
                 endDate: '',
                 range: '',
-                filters: [
-                    {name: "В любое время", params: {startDate: '', endDate: ''}},
-                    {name: "На этой неделе", params: {startDate: moment().startOf('week').format(), endDate: moment().endOf('week').format()}},
-                    {name: "В этом месяце", params: {startDate: moment().startOf('month').format(), endDate: moment().endOf('month').format()}},
-                ]
+                monthCount: 3,
+                staticFilters: [
+                    {name: "В любое время", params: {startDate: '', endDate: ''}}
+                ],
+                // filters: [
+                //     {name: this.getHumanDate(moment(),'MMMM'), params: {startDate: moment().startOf('week').format(), endDate: moment().endOf('week').format()}},
+                //     {name: "В этом месяце", params: {startDate: moment().startOf('month').format(), endDate: moment().endOf('month').format()}},
+                // ]
             }
         },
         mounted() {
@@ -82,6 +85,21 @@
                 }
                 return params;
             },
+            filters(){
+                var generatedFilters = [];
+                for(var i=0;i< this.monthCount; i++){
+                    var filter = {}
+                    var month = moment().add(i,'month')
+                    filter['name'] = this.getHumanDate(month,'MMMM')
+                    filter['params'] = {
+                        startDate: month.startOf('month').format(),
+                        endDate: month.endOf('month').format()
+                    }
+                    generatedFilters.push(filter)
+                    //{name: this.getHumanDate(moment(),'MMMM'), params: {startDate: moment().startOf('week').format(), endDate: moment().endOf('week').format()}}
+                }
+                return [...this.staticFilters,...generatedFilters]
+            },
             canLoad(){
                 return this.per_page * this.page < this.eventsCount
             }
@@ -94,6 +112,9 @@
             },
             setCustomFilter(i){
                 this.$modal.show('filter-modal')
+            },
+            getHumanDate(date,format = "LLL"){
+                return moment(date).locale('ru').format(format)
             },
             setDate(newDate = {startDate: '',endDate: ''}){
                 this.startDate = newDate.startDate;
@@ -153,7 +174,6 @@
             overflow-x: scroll;
             margin-top: -15px;
             padding-top: 15px;
-            border-radius: 8px;
             &::-webkit-scrollbar {
               display: none;
             }
@@ -197,6 +217,9 @@
         padding: 0 15px 15px;
         border-bottom: 3px solid rgba(0,0,0,0);
         transition: .19s ease-in all;
+        &::first-letter{
+            text-transform: uppercase;
+        }
         &:not(.events-filter-tab--active):hover{
             cursor: pointer;
             border-color: $LIGHT-BLUE;
@@ -214,6 +237,7 @@
     }
     @media screen and (max-width: 768px){
         .events__filters{
+            border-radius: 8px;
             box-shadow: inset 10px 0px 10px 0px #ececec, inset -10px 0px 10px 0px #ececec;
         }
     }

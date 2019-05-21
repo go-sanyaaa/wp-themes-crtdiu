@@ -14,3 +14,5 @@ export const ADD_EVENTS = 'addEvents'
 export const SET_EVENTS_COUNT = 'setEventsCount'
 export const UPDATE_EVENT_SUBSCRIBE = 'updateEventSubscribe'
 export const SET_EVENTS_CAT = 'setEventsCat'
+
+export const SET_UNIONS = 'setUnions'

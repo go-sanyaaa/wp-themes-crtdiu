@@ -189,6 +189,11 @@
         margin-bottom: 0;
       }
     }
+    &--single{
+      .post__container{
+        padding: 0 30px;
+      }
+    }
   }
 }
 
@@ -200,16 +205,21 @@
         margin-bottom: 0;
       }
     }
-  }
-}
-
-@media screen and (max-width: 768px){
-  .post--single {
-    .post__container{
-      padding: 0;
+    &--single{
+      .post__container{
+        padding: 0;
+      }
     }
   }
 }
+
+//@media screen and (max-width: 768px){
+//  .post--single {
+//    .post__container{
+//      padding: 0;
+//    }
+//  }
+//}
 
 @media screen and (max-width: 420px){
   .post--item{

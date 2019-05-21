@@ -1,8 +1,8 @@
 import JwtService from '@/common/jwt.service'
 import ApiService from '@/common/api.service'
 
-import {AUTH_LOGIN, AUTH_LOGOUT, UPDATE_USER, CHECK_TOKEN} from "@/store/actions.type";
-import {SET_TOKEN, PURGE_AUTH, SET_USER, SET_ERROR} from "@/store/mutations.type";
+import {AUTH_LOGIN, AUTH_LOGOUT, UPDATE_USER, CHECK_TOKEN} from "../store/actions.type";
+import {SET_TOKEN, PURGE_AUTH, SET_USER, SET_ERROR} from "../store/mutations.type";
 
 const state = {
     isAuthenticated: !!JwtService.getToken(),

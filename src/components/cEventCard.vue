@@ -4,13 +4,8 @@
             a.event__image-container
                 img.event__img(
                     :src='getPostImages(event)'
+                    :class="{'event__img--completed':eventHasCome && !eventOnline}"
                 )
-                div.event__img-wrapper
-                    div.event__categories
-                        a.event__cat.tag(
-                            v-for="cat in getEventCats(event.event_cat)"
-                            :href="`/events/${cat.slug}`"
-                        ) {{cat.name}}
                 event-subscribe(
                     v-if="!eventHasCome && !eventOnline"
                     :event="event"
@@ -18,19 +13,28 @@
                     button-style="full-width"
                     :class="showSubscribeButton ? 'event__subscribe--show' : 'event__subscribe--hide'"
                 )
-                div.event__online(v-if="eventOnline")
-                    span.event__online-icon
+                div.event__status.event__status--online(v-else-if="eventOnline")
+                    span.event__status-icon
                     | Сейчас идет
+                div.event__status.event__status--completed(v-else)
+                    | Завершено
+                div.event__img-wrapper
+                    div.event__categories
+                        a.event__cat.tag(
+                            v-for="cat in getEventCats(event.event_cat)"
+                            :href="`/events/${cat.slug}`"
+                        ) {{cat.name}}
             div.event__data
                 a.event__header(v-html="event.title.rendered" :href="event.link")
                 div.event__body
                     div.event__meta.meta
                         span.meta__field.meta__field--chips.meta__field--blue
                             | {{getHumanDate(event.event_date,"LL")}}
-                        span.meta__field.meta__field--chips(:class="eventHasCome ? 'meta__field--red' : '' ")
+                        span.meta__field.meta__field--chips(
+                            :class="{'meta__field--red' : eventHasCome && false}")
                             i.fas.fa-clock.meta__icon
                             | {{getHumanDate(event.event_date,"LT")}} - {{getHumanDate(event.event_date_end,"LT")}}
-                            template(v-if="eventHasCome")
+                            //template(v-if="eventHasCome")
                                 span.meta__subtext Завершено
                     hr
                     div.event__infopanel
@@ -122,6 +126,9 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            &--completed{
+                filter: grayscale(1);
+            }
         }
         &__img-wrapper{
             position: absolute;
@@ -167,14 +174,16 @@
             margin: 20px 0;
         }
         &__subscribe{
+            cursor: pointer;
             &--show{
+                z-index: 1;
                 transform: translateY(0);
             }
             &--hide{
                 transform: translateY(100%);
             }
         }
-        &__online{
+        &__status{
             position: absolute;
             bottom: 0;
             left: 0;
@@ -184,24 +193,32 @@
             justify-content: center;
             width: 100%;
             padding: 10px 20px;
+            height: 100%;
             box-sizing: border-box;
-            color: red;
-            font-size: 13px;
+            font-size: 15px;
             font-weight: bold;
-            background: transparentize(#FFF,.15);
+            &-icon{
+                display: flex;
+                width: 8px;
+                height: 8px;
+                background: red;
+                border-radius: 50%;
+                margin-right: 6px;
+                animation-name: blink;
+                animation-timing-function: linear;
+                animation-duration: 2s;
+                animation-iteration-count: infinite;
+            }
+            &--online{
+                color: red;
+                background: transparentize(#FFF,.3);
+            }
+            &--completed{
+                background: transparentize($DEEP-RED,.5);
+                color: #FFF;
+            }
         }
-        &__online-icon{
-            display: flex;
-            width: 8px;
-            height: 8px;
-            background: red;
-            border-radius: 50%;
-            margin-right: 6px;
-            animation-name: blink;
-            animation-timing-function: linear;
-            animation-duration: 2s;
-            animation-iteration-count: infinite;
-        }
+
         @media screen and (max-width: 1200px){
             margin: 0 30px 30px 0;
             width: calc(50% - 15px);
