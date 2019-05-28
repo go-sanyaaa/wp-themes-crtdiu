@@ -45,7 +45,7 @@ const actions = {
     [AUTH_LOGIN](context,user){
         return new Promise((res,rej)=>{
             const {username, password} = user
-            ApiService.post('aam/v1/authenticate',{username,password})
+            ApiService.post('jwt-auth/v1/token',{username,password})
                 .then(resp => {
                     const token = resp.data.token;
                     context.commit(SET_TOKEN,token)
@@ -57,6 +57,7 @@ const actions = {
                         })
                 })
                 .catch(err => {
+                    console.log(err.response);
                     context.commit(SET_ERROR,[err.response.data.message])
                 })
         })
@@ -65,10 +66,11 @@ const actions = {
         return new Promise((res,rej)=>{
             ApiService.post('wp/v2/users/me')
                 .then(resp => {
-                    const {id,name,email, avatar_urls, username} = resp.data;
+                    const {id,name,email, avatar_urls} = resp.data;
                     context.commit(SET_USER,{
                         id,
                         name,
+                        email,
                         avatar_urls,
                     })
                     res(resp)
@@ -78,12 +80,10 @@ const actions = {
     [CHECK_TOKEN](context, token){
         return new Promise((res,rej) => {
             ApiService.setHeader()
-            ApiService.post('/aam/v1/validate-jwt',{jwt:token})
+            ApiService.post('/jwt-auth/v1/token/validate')
                 .then(resp => {
-                    if(resp.data.status == 'valid'){
-                        context.commit(SET_TOKEN,token)
-                        res(resp)
-                    }
+                    context.commit(SET_TOKEN,token)
+                    res(resp)
                 })
                 .catch(err => {
                     context.commit(PURGE_AUTH)

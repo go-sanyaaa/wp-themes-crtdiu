@@ -8,7 +8,7 @@ const ApiService = {
     },
 
     setHeader() {
-        axios.defaults.headers.common["Authentication"] = `${JwtService.getToken()}`;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${JwtService.getToken()}`;
     },
 
     get(resource, params = {}) {

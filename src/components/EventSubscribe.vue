@@ -1,8 +1,8 @@
 <template lang="pug">
     div.event-subscribe(:class="addedClasses")
-        button.button.button--green.event-subscribe--no-subscribed(v-if="!isRegister" @click="subscribe") Записаться
+        button.button.button--green.event-subscribe--no-subscribed(v-if="!isRegister" @click="subscribe" name="subscribe") Записаться
             i.fas.fa-user-plus.button-icon
-        button.button.button--light-blue.event-subscribe--subscribed(v-else @click="unSubscribe") Вы записаны
+        button.button.button--light-blue.event-subscribe--subscribed(v-else @click="unSubscribe" name="unsubscribe") Вы записаны
             i.fas.fa-user-check.button-icon
 </template>
 

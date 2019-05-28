@@ -1,7 +1,7 @@
 <template lang="pug">
     div.auth
         template(v-if="!isAuthenticated")
-            button.button.button--red(@click.prevent="showAuthModal")
+            button.button.button--red(@click.prevent="showAuthModal" name="auth")
                 | Войти
                 i.fas.fa-sign-in-alt.button-icon
             modal(

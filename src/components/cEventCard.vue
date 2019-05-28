@@ -7,17 +7,15 @@
                     :class="{'event__img--completed':eventHasCome && !eventOnline}"
                 )
                 event-subscribe(
-                    v-if="!eventHasCome && !eventOnline"
+                    v-if="!eventHasCome"
                     :event="event"
                     :is-register="event.is_register"
                     button-style="full-width"
                     :class="showSubscribeButton ? 'event__subscribe--show' : 'event__subscribe--hide'"
                 )
-                div.event__status.event__status--online(v-else-if="eventOnline")
+                div.event__status.event__status--online(v-if="eventOnline")
                     span.event__status-icon
                     | Сейчас идет
-                div.event__status.event__status--completed(v-else)
-                    | Завершено
                 div.event__img-wrapper
                     div.event__categories
                         a.event__cat.tag(
@@ -31,7 +29,7 @@
                         span.meta__field.meta__field--chips.meta__field--blue
                             | {{getHumanDate(event.event_date,"LL")}}
                         span.meta__field.meta__field--chips(
-                            :class="{'meta__field--red' : eventHasCome && false}")
+                            :class="{'meta__field--red' : eventHasCome}")
                             i.fas.fa-clock.meta__icon
                             | {{getHumanDate(event.event_date,"LT")}} - {{getHumanDate(event.event_date_end,"LT")}}
                             //template(v-if="eventHasCome")

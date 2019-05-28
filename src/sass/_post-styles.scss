@@ -3,7 +3,7 @@
   margin-block-end: $size;
 }
 
-.post--single .post__content {
+.post--single .post__content, .page__content {
   & > *:first-child {
     margin-top: 0;
     margin-block-start: 0 !important;

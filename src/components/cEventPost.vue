@@ -4,14 +4,12 @@
         template(v-else)
             v-dialog
             figure.event__thumbnail
-                img.event__thumbnail-img(:src="getPostImages(event)" :class="eventHasCome && !eventOnline ? 'event__thumbnail-img--completed' : ''")
-                div.event__status(v-if="(!eventHasCome && eventOnline) || eventHasCome"
-                    :class="eventOnline ? 'event__status--online' : 'event__status--completed'")
+                img.event__thumbnail-img(:src="getPostImages(event)" :alt="event.better_featured_image.alt_text" :class="{'event__thumbnail-img--completed':eventHasCome && !eventOnline}")
+                div.event__status(v-if="eventOnline"
+                    :class="{'event__status--online':eventOnline}")
                     template(v-if="eventOnline")
                         span.event__status-icon
                         | Сейчас идет
-                    template(v-else)
-                        | Завершено
             div.event__container.post__container
                 header.post__header
                     div.event__cats.tag-list
@@ -24,11 +22,9 @@
                         div.event__meta.meta
                             span.meta__field.meta__field--chips.meta__field--blue
                                 | {{getHumanDate(event.event_date,"LL")}}
-                            span.meta__field.meta__field--chips(:class="eventHasCome && false ? 'meta__field--red' : '' ")
+                            span.meta__field.meta__field--chips(:class="{'meta__field--red' : eventHasCome }")
                                 i.fas.fa-clock.meta__icon
                                 | {{getHumanDate(event.event_date,"LT")}} - {{getHumanDate(event.event_date_end,"LT")}}
-                                //template(v-if="eventHasCome")
-                                    span.meta__subtext Завершено
                             span.meta__field
                                 i.fas.fa-users.meta__icon
                                 | {{event.persons}}
