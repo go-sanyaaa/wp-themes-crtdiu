@@ -1,14 +1,13 @@
-import {FETCH_UNIONS} from "./actions.type";
-import {SET_UNIONS} from "./mutations.type";
+import {FETCH_UNIONS} from "../actions.type";
+import {SET_UNIONS} from "../mutations.type";
 
-import ApiService from "../common/api.service"
+import ApiService from "@/common/api.service"
 
 const state = {
     unions: []
 }
 
 const getters = {
-    unions: state => state.unions,
     shortUnionsList: (state) => state.unions.map((value => {
         return {
             id: value.id,
@@ -40,6 +39,7 @@ const mutations = {
 }
 
 export default {
+    namespaced: true,
     state,
     mutations,
     actions,

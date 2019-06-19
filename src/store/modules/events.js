@@ -1,4 +1,4 @@
-import ApiService from '../common/api.service'
+import ApiService from '@/common/api.service'
 
 
 import {
@@ -9,7 +9,7 @@ import {
     SUBSCRIBE_ON_EVENT,
     UNSUBSCRIBE_ON_EVENT,
     ADD_MORE_EVENTS
-} from "./actions.type";
+} from "../actions.type";
 
 import {
     SET_EVENT,
@@ -17,7 +17,7 @@ import {
     SET_EVENTS_COUNT,
     SET_EVENTS_CAT,
     UPDATE_EVENT_SUBSCRIBE, ADD_EVENTS
-} from "./mutations.type";
+} from "../mutations.type";
 
 const state = {
     eventsCount: 0,
@@ -27,10 +27,6 @@ const state = {
 
 const getters = {
     catCount: state => state.categories.length,
-    events: state =>  state.events,
-    event: state => state.event,
-    categories: state => state.categories,
-    eventsCount: state => state.eventsCount,
 }
 
 const actions = {
@@ -86,24 +82,24 @@ const actions = {
     [SUBSCRIBE_ON_EVENT](context,event_id){
         return new Promise((res,rej) => {
             ApiService.post(`wp/v2/events/${event_id}`)
-                .then(resp => {
-                    const {data} = resp
-                    if(data.status){
-                        context.commit(UPDATE_EVENT_SUBSCRIBE,{event_id})
-                    }
-                    res({status:resp.status,text: resp.statusText})
+                .then(({data}) => {
+                    return ApiService.get(`wp/v2/events/${event_id}`)
+                })
+                .then(({data}) => {
+                    context.commit(UPDATE_EVENT_SUBSCRIBE,data)
+                    res(data)
                 })
         })
     },
     [UNSUBSCRIBE_ON_EVENT](context,event_id){
         return new Promise((res,rej) => {
             ApiService.delete(`wp/v2/events/${event_id}`)
-                .then(resp => {
-                    const {data} = resp
-                    if(data.status){
-                        context.commit(UPDATE_EVENT_SUBSCRIBE,{event_id})
-                    }
-                    res({status:resp.status,text: resp.statusText})
+                .then(({data}) => {
+                    return ApiService.get(`wp/v2/events/${event_id}`)
+                })
+                .then(({data}) => {
+                    context.commit(UPDATE_EVENT_SUBSCRIBE,data)
+                    res(data)
                 })
         })
     }
@@ -119,9 +115,13 @@ const mutations = {
         state.categories = cats
     },
     [UPDATE_EVENT_SUBSCRIBE](state,data){
-        const {event_id} = data
-        const event_i = state.events.findIndex(event => event.id === event_id)
-        state.events[event_i].is_register = !state.events[event_i].is_register
+        const {id} = data
+        const event_i = state.events.findIndex(event => event.id === id)
+        console.log(data)
+        if(event_i != -1){
+            state.events[event_i].is_register = data.is_register
+            state.events[event_i].place_free = data.place_free
+        }
     },
     [SET_EVENTS_COUNT](state,{events_count}){
         state.eventsCount = events_count
@@ -135,6 +135,7 @@ const mutations = {
 }
 
 export default {
+    namespaced: true,
     state,
     getters,
     actions,

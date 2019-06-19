@@ -4,7 +4,7 @@
         template(v-else)
             v-dialog
             figure.event__thumbnail
-                img.event__thumbnail-img(:src="getPostImages(event)" :alt="event.better_featured_image.alt_text" :class="{'event__thumbnail-img--completed':eventHasCome && !eventOnline}")
+                img.event__thumbnail-img(:src="getPostImages" :alt="getPostImageAlt" :class="{'event__thumbnail-img--completed':eventHasCome && !eventOnline}")
                 div.event__status(v-if="eventOnline"
                     :class="{'event__status--online':eventOnline}")
                     template(v-if="eventOnline")
@@ -27,7 +27,7 @@
                                 | {{getHumanDate(event.event_date,"LT")}} - {{getHumanDate(event.event_date_end,"LT")}}
                             span.meta__field
                                 i.fas.fa-users.meta__icon
-                                | {{event.persons}}
+                                | {{event.persons}} ({{event.place_free}})
                         div.event__actions(v-if="!eventHasCome")
                             event-subscribe(:event="event" :is-register="event.is_register")
                 hr.post__hr
@@ -44,7 +44,7 @@
     import Comments from "./Comments"
     import EventSubscribe from "./EventSubscribe"
     import {FETCH_EVENTS_CAT, GET_EVENT} from "../store/actions.type";
-    import {mapGetters} from "vuex";
+    import {mapState} from "vuex";
 
     export default {
         name: "cEventPost",
@@ -61,13 +61,13 @@
         },
         mounted() {
             Promise.all([
-                this.$store.dispatch(GET_EVENT,{event_id: this.eventId}),
-                this.$store.dispatch(FETCH_EVENTS_CAT)
+                this.$store.dispatch(`events/${GET_EVENT}`,{event_id: this.eventId}),
+                this.$store.dispatch(`events/${FETCH_EVENTS_CAT}`)
             ])
                 .then(()=>{this.isLoading = false})
         },
         computed: {
-            ...mapGetters(['events','categories']),
+            ...mapState('events',['events','categories']),
             event(){
                 return this.events[0]
             },
@@ -76,10 +76,9 @@
             },
             eventOnline(){
                 return moment().isBetween(this.event.event_date, this.event.event_date_end)
-            }
-        },
-        methods:{
-            getPostImages(post){
+            },
+            getPostImages(){
+                const {event: post} = this
                 if(post.better_featured_image){
                     var images = post.better_featured_image.media_details.sizes;
                     var max_size = Object.keys(images).pop()
@@ -88,6 +87,12 @@
                     return 'https://crtdiu-app.ru/wp-content/themes/crtdiu/img/news-default.png'
                 }
             },
+            getPostImageAlt(){
+                const {event: post} = this
+                return post.better_featured_image && post.better_featured_image.alt_text ? event.better_featured_image.alt_text : 'Изображение собтия'
+            }
+        },
+        methods:{
             getEventCats(cat_array){
                 const event_cats = [...cat_array]
                 return this.categories.filter(category => event_cats.some((cat_id,i) => category.id == cat_id && delete event_cats[i]))

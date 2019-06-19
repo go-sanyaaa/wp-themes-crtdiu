@@ -55,10 +55,10 @@
             linkDesc: {type: String, required: true}
         },
         mounted(){
-            this.$store.dispatch(FETCH_UNIONS)
+            this.$store.dispatch(`unions/${FETCH_UNIONS}`)
         },
         computed: {
-            ...mapGetters(['shortUnionsList']),
+            ...mapGetters({shortUnionsList:'unions/shortUnionsList'}),
             linkIconClass(){
                 return `fa-${this.linkIcon}`
             }

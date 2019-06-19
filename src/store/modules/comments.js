@@ -1,7 +1,16 @@
-import ApiService from '../common/api.service'
+import ApiService from '@/common/api.service'
 
-import {CREATE_COMMENT, FETCH_COMMENTS, CHANGE_PARENT} from "./actions.type";
-import {SET_COMMENTS, SET_COMMENTS_COUNT, SET_PARENT} from "./mutations.type";
+import {
+    CREATE_COMMENT,
+    FETCH_COMMENTS,
+    CHANGE_PARENT
+} from "../actions.type";
+
+import {
+    SET_COMMENTS,
+    SET_COMMENTS_COUNT,
+    SET_PARENT
+} from "../mutations.type";
 
 const state = {
     isLoading: true,
@@ -11,10 +20,6 @@ const state = {
 }
 
 const getters = {
-    comments(state){
-        return state.comments
-    },
-    commentsCount: (state) => state.commentsCount
 }
 
 const mutations = {
@@ -62,6 +67,7 @@ const actions = {
 }
 
 export default {
+    namespaced: true,
     state,
     mutations,
     actions,

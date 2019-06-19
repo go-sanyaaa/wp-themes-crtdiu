@@ -59,11 +59,11 @@
                     Object.assign(comment_data,{author_name,author_email})
                 }
 
-                this.$store.dispatch(CREATE_COMMENT,comment_data)
+                this.$store.dispatch(`comments/${CREATE_COMMENT}`,comment_data)
                     .then((resp)=>{
                         this.parseMessage(resp)
                         this.comment = ''
-                        this.$store.dispatch(FETCH_COMMENTS,{post_id:post,page_id:1})
+                        this.$store.dispatch(`comments/${FETCH_COMMENTS}`,{post_id:post,page_id:1})
                         loader.hide()
                     })
                     .catch(err => {
@@ -91,7 +91,7 @@
             }
         },
         computed: {
-            ...mapGetters(['isAuthenticated']),
+            ...mapGetters({isAuthenticated: 'auth/isAuthenticated'}),
             author_name(){
                 return this.name + ' ' + this.sname
             }

@@ -39,13 +39,13 @@
                         div.event__meta.meta
                             span.meta__field
                                 i.fas.fa-users.meta__icon
-                                | {{event.persons}}
+                                | {{event.persons}} ({{event.place_free}})
                         a.event__link-more(:href="event.link") Подробнее
 </template>
 
 <script>
     import moment from "moment"
-    import {mapGetters} from 'vuex'
+    import {mapState} from 'vuex'
     import EventSubscribe from "./EventSubscribe"
 
     export default {
@@ -57,7 +57,7 @@
             }
         },
         computed: {
-            ...mapGetters(['categories']),
+            ...mapState('events',['categories']),
             showSubscribeButton(){
                 return (this.isHover && !this.event.is_register) || this.event.is_register
             },

@@ -36,7 +36,7 @@
 
 <script>
     // import DatePicker from "vue2-datepicker"
-    import {mapGetters} from "vuex"
+    import {mapState, mapGetters} from "vuex"
     import {ADD_MORE_EVENTS, FETCH_EVENTS, LOAD_EVENTS} from "../store/actions.type";
     import cEventCard from "./cEventCard"
     import Loading from 'vue-loading-overlay'
@@ -47,7 +47,7 @@
         name: "cEventsArchive",
         data(){
             return{
-                per_page: 2,
+                per_page: 10,
                 page: 1,
                 activeFilter: 0,
                 isFetchMore: false,
@@ -60,18 +60,14 @@
                 staticFilters: [
                     {name: "В любое время", params: {startDate: '', endDate: ''}}
                 ],
-                // filters: [
-                //     {name: this.getHumanDate(moment(),'MMMM'), params: {startDate: moment().startOf('week').format(), endDate: moment().endOf('week').format()}},
-                //     {name: "В этом месяце", params: {startDate: moment().startOf('month').format(), endDate: moment().endOf('month').format()}},
-                // ]
             }
         },
         mounted() {
-            this.$store.dispatch(LOAD_EVENTS,Object.assign(this.filter,{per_page:this.per_page}))
+            this.$store.dispatch(`events/${LOAD_EVENTS}`,Object.assign(this.filter,{per_page:this.per_page}))
                 .then(resp => this.isLoading = false)
         },
         computed:{
-            ...mapGetters(['events','categories','eventsCount']),
+            ...mapState('events',['events','categories','eventsCount']),
             filter(){
                 const params = {};
                 if(this.catId != 0){
@@ -123,14 +119,14 @@
             loadNextPage(){
                 this.isFetchMore = true
                 this.page = ++this.page
-                this.$store.dispatch(ADD_MORE_EVENTS,Object.assign(this.filter,{per_page:this.per_page,page:this.page}))
+                this.$store.dispatch(`events/${ADD_MORE_EVENTS}`,Object.assign(this.filter,{per_page:this.per_page,page:this.page}))
                     .then(resp => this.isFetchMore = false)
             }
         },
         watch:{
             filter: function (filters) {
                 this.isFetch = true
-                this.$store.dispatch(FETCH_EVENTS,Object.assign(filters,{per_page:this.per_page,page:this.page}))
+                this.$store.dispatch(`events/${FETCH_EVENTS}`,Object.assign(filters,{per_page:this.per_page,page:this.page}))
                     .then(resp => this.isFetch = false)
             }
         },

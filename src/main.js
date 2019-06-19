@@ -44,8 +44,8 @@ Vue.use(VueCookie)
 ApiService.init()
 
 if(JwtService.getToken()){
-    store.dispatch(CHECK_TOKEN,JwtService.getToken()).then(resp => {
-        store.dispatch(UPDATE_USER)
+    store.dispatch(`auth/${CHECK_TOKEN}`,JwtService.getToken()).then(resp => {
+        store.dispatch(`auth/${UPDATE_USER}`)
     })
 }
 

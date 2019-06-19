@@ -9,52 +9,37 @@
                 :style="{'height': 'auto'}"
                 v-if="!isLoading"
             )
-                slide
-                    div.event
-                        template(v-if="saturdayEvents.length")
+                template(v-for="event in treeEvents")
+                    slide(v-if="event.type === 'group'")
+                        div.event
                             div.event__data
-                                div.event__name.event__name--nested.text--red Развивающая суббота
+                                div.event__name.event__name--nested.text--red {{event.group.name}}
                                 div.event__meta.event__meta--nested
-                                    div.event__meta-date 16 Февраля
+                                    div.event__meta-date {{getHumanDate(event.date,'D MMMM')}}
                                     a.event__meta-link(href="/events") Все события
-                                a.event-nested(v-for="(event,i) in saturdayEvents" :href="event.link")
-                                    template(v-if="i <= 2")
-                                        h2.event-nested__name(v-html="event.title.rendered")
-                                        div.event-nested__date.meta
-                                            span.event__date.meta__field.meta__field--chips-small
-                                                i.fas.fa-clock.meta__icon
-                                                | {{getHumanDate(event.event_date,"LT")}} - {{getHumanDate(event.event_date_end,"LT")}}
-                                div.event-nested__more-box(v-if="saturdayEvents.length > 2")
-                                    a.event-nested__more-link Просмотреть другие события...
-                        template(v-else)
-                            c-alert(:closed="false" @ok="this.console.log('Heelo')")
-                                template К сожалению на этой неделе нет других запланированных событий. Перейдите по ссылке ниже чтобы просмотреть все события
-                                template(v-slot:actions)
-                                    a.alert__button.alert__ok(href="/events") Все события
-                template(v-if="otherEvents.length")
-                    slide(v-for="event in otherEvents" :key="event.id")
-                        div.event
-                            div.event__data
-                                a.event__name.event__link(:href="event.link" v-html="event.title.rendered")
-                                div.event__meta.meta
-                                    span.event__date.meta__field
-                                        i.fas.fa-clock.meta__icon
-                                        | {{getHumanDate(event.event_date,"LL")}}, {{getHumanDate(event.event_date,"LT")}} - {{getHumanDate(event.event_date_end,"LT")}}
-                                    span.event__persons.meta__field
-                                        i.fas.fa-users.meta__icon
-                                        | {{event.persons}}
-                                div.event__desc-box
-                                    div
-                                        p.event__desc(v-html="event.excerpt.rendered")
-                                div.event__actions(v-if="!eventHasCome(event)")
-                                    event-subscribe(:event="event" :is-register="event.is_register")
-                template(v-else)
-                    slide
-                        div.event
-                            c-alert(:closed="false" @ok="this.console.log('Heelo')")
-                                template К сожалению на этой неделе нет других запланированных событий. Перейдите по ссылке ниже чтобы просмотреть все события
-                                template(v-slot:actions)
-                                    a.alert__button.alert__ok(href="/events") Все события
+                                a.event-nested(v-for="cEvent in event.childEvents" :key="`event-nested-${cEvent.id}`" :href="cEvent.link")
+                                    h2.event-nested__name(v-html="cEvent.title.rendered")
+                                    div.event-nested__date.meta
+                                        span.event__date.meta__field.meta__field--chips-small
+                                            i.fas.fa-clock.meta__icon
+                                            | {{getHumanDate(cEvent.event_date,"LT")}} - {{getHumanDate(cEvent.event_date_end,"LT")}}
+                    template(v-else)
+                        slide
+                            div.event
+                                div.event__data
+                                    a.event__name.event__link(:href="event.link" v-html="event.title.rendered")
+                                    div.event__meta.meta
+                                        span.event__date.meta__field
+                                            i.fas.fa-clock.meta__icon
+                                            | {{getHumanDate(event.event_date,"LL")}}, {{getHumanDate(event.event_date,"LT")}} - {{getHumanDate(event.event_date_end,"LT")}}
+                                        span.event__persons.meta__field
+                                            i.fas.fa-users.meta__icon
+                                            | {{event.persons}} ({{event.place_free}})
+                                    div.event__desc-box
+                                        div
+                                            p.event__desc(v-html="event.excerpt.rendered")
+                                    div.event__actions(v-if="!eventHasCome(event)")
+                                        event-subscribe(:event="event" :is-register="event.is_register")
             div.event-slider__cntrl.container.block.block--slider
                 button.event-slider__btn.event-slider__prev(@click.prevent="prevEvent")
                     i.fas.fa-long-arrow-alt-left.button-icon
@@ -77,9 +62,8 @@
     export default {
         data(){
             return {
-                events: [],
                 isLoading: true,
-                saturdayEventName: 'Развивающая суббота',
+                groupEventsName: ['Развивающая суббота'],
                 hooperSettings: {
                     itemsToSlide: 1,
                     itemsToShow: 1,
@@ -112,30 +96,45 @@
         },
         computed: {
             ...mapGetters({
-                newEvents: 'events',
-                isAuthenticated: 'isAuthenticated'
+                isAuthenticated: 'auth/isAuthenticated'
             }),
-            ...mapState({
-                cats: state => state.events.categories
+            ...mapState('events', {
+                categories: state => state.categories,
+                events: state => state.events,
             }),
-            saturdayEventId(){
-                return this.cats.find(cat => cat.name == this.saturdayEventName).id
+            treeEvents(){
+                let {categories} = this
+                let events = [];
+                this.events
+                    .sort((a,b) => moment(a.event_date) - moment(b.event_date))
+                    .forEach((el,i,arr) => {
+                        const group = categories.find(cat => el.event_cat.includes(cat.id))
+                        if(group){
+                            let last_el = events[events.length - 1]
+                            if(
+                                last_el.type === 'group' &&
+                                last_el.date === moment(el.event_date).format('MM-DD-YYYY') &&
+                                last_el.group.id === group.id
+                            ){
+                                events[events.length - 1].childEvents.push(el)
+                            }
+                            else{
+                                events.push({
+                                    type:'group',
+                                    group: group,
+                                    date: moment(el.event_date).format('MM-DD-YYYY'),
+                                    childEvents: [el]
+                                })
+                            }
+                        }else{
+                            events.push(Object.assign(el,{type:'single'}))
+                        }
+                    })
+                return events;
             },
-            saturdayEvents(){
-                const cat_id = this.saturdayEventId
-                return this.newEvents.filter(event => {
-                    return event.event_cat.find(cat => cat == cat_id)
-                })
-            },
-            otherEvents(){
-                const cat_id = this.saturdayEventId
-                return this.newEvents.filter(event => {
-                    return !event.event_cat.find(cat => cat == cat_id)
-                })
-            }
         },
         created(){
-            this.$store.dispatch(LOAD_EVENTS).then(resp => {
+            this.$store.dispatch(`events/${LOAD_EVENTS}`).then(resp => {
                 this.isLoading = !resp
             })
         },

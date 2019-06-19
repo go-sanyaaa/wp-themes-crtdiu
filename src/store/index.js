@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import auth from './auth.module'
-import comments from './comments.module'
-import events from './events.module'
-import unions from './unions.module'
+import auth from './modules/auth'
+import comments from './modules/comments'
+import events from './modules/events'
+import unions from './modules/unions'
 
 Vue.use(Vuex)
 

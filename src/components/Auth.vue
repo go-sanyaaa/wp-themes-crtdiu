@@ -35,7 +35,7 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex'
+    import {mapGetters, mapState} from 'vuex'
     import {AUTH_LOGIN, AUTH_LOGOUT} from "../store/actions.type";
     import Loading from 'vue-loading-overlay'
 
@@ -66,7 +66,8 @@
             }
         },
         computed: {
-            ...mapGetters(['isAuthenticated','user'])
+            ...mapGetters({isAuthenticated:'auth/isAuthenticated'}),
+            ...mapState('auth',['user'])
         }
     }
 </script>

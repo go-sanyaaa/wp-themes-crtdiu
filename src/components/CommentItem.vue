@@ -32,12 +32,12 @@
                 return moment(date).locale('ru').format('LLL')
             },
             switchParent(id){
-                this.$store.dispatch(CHANGE_PARENT,id)
+                this.$store.dispatch(`comments/${CHANGE_PARENT}`,id)
             }
         },
         computed:{
-            ...mapState({
-                for_comment: state => state.comments.parent
+            ...mapState('comments',{
+                for_comment: state => state.parent
             }),
             parent_id(){
                 if(this.item.parent){

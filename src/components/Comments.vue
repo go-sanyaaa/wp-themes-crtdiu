@@ -13,7 +13,7 @@
 </template>
 
 <script>
-    import {mapState,mapGetters} from 'vuex'
+    import {mapState} from 'vuex'
     import {FETCH_COMMENTS, CHANGE_PARENT} from "../store/actions.type";
     import CommentItem from './CommentItem'
     import CommentForm from './CommentForm'
@@ -31,35 +31,32 @@
         created() {
             const post_id = this.post
             const page_id = this.page_id
-            this.$store.dispatch(FETCH_COMMENTS,{post_id,page_id})
-            this.$store.dispatch(CHANGE_PARENT, 0)
+            this.$store.dispatch(`comments/${FETCH_COMMENTS}`,{post_id,page_id})
+            this.$store.dispatch(`comments/${CHANGE_PARENT}`, 0)
         },
         methods:{
             loadMoreComments(){
                 const post_id = this.post
                 const page_id = ++this.page_id
-                this.$store.dispatch(FETCH_COMMENTS,{post_id,page_id})
+                this.$store.dispatch(`comments/${FETCH_COMMENTS}`,{post_id,page_id})
             }
         },
         provide: {
             cancelComment(){
-                this.$store.dispatch(CHANGE_PARENT, 0)
+                this.$store.dispatch(`comments/${CHANGE_PARENT}`, 0)
             }
         },
         computed:{
-            ...mapGetters(['commentsCount']),
-            ...mapState({
-                getComments: state => state.comments.comments,
-                isLoading: state => state.comments.isLoading,
-                for_comment: state => state.comments.parent
+            ...mapState('comments',{
+                getComments: state => state.comments,
+                isLoading: state => state.isLoading,
+                for_comment: state => state.parent,
+                commentsCount: state => state.commentsCount
             }),
             comments(){
                 const comments = this.getComments
-                // console.log(this.getComments)
                 let commentsTree = []
                 let commentsKey = []
-
-                // console.log('Load')
 
                 let i = 0
                 for(;i < comments.length; i++){

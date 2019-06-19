@@ -1,8 +1,19 @@
 import JwtService from '@/common/jwt.service'
 import ApiService from '@/common/api.service'
 
-import {AUTH_LOGIN, AUTH_LOGOUT, UPDATE_USER, CHECK_TOKEN} from "../store/actions.type";
-import {SET_TOKEN, PURGE_AUTH, SET_USER, SET_ERROR} from "../store/mutations.type";
+import {
+    AUTH_LOGIN,
+    AUTH_LOGOUT,
+    UPDATE_USER,
+    CHECK_TOKEN
+} from "../actions.type";
+
+import {
+    SET_TOKEN,
+    PURGE_AUTH,
+    SET_USER,
+    SET_ERROR
+} from "../mutations.type";
 
 const state = {
     isAuthenticated: !!JwtService.getToken(),
@@ -14,9 +25,6 @@ const state = {
 const getters = {
     isAuthenticated(state) {
         return state.isAuthenticated;
-    },
-    user(state) {
-        return state.user;
     }
 }
 
@@ -99,6 +107,7 @@ const actions = {
 }
 
 export default {
+    namespaced: true,
     state,
     mutations,
     actions,

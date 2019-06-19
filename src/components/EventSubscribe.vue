@@ -28,7 +28,7 @@
             }
         },
         computed:{
-            ...mapGetters(['isAuthenticated']),
+            ...mapGetters({isAuthenticated:'auth/isAuthenticated'}),
             addedClasses(){
                 const objClasses = {};
                 if(this.buttonStyle === 'full-width'){
@@ -38,7 +38,6 @@
             }
         },
         methods: {
-
             subscribe(){
                 const {id} = this.event;
                 if(!this.isAuthenticated){
@@ -89,7 +88,7 @@
                                 let loader = this.$loading.show({
                                     container: null
                                 })
-                                this.$store.dispatch(SUBSCRIBE_ON_EVENT,id)
+                                this.$store.dispatch(`events/${SUBSCRIBE_ON_EVENT}`,id)
                                     .then((resp) => {
                                         loader.hide()
                                         this.$modal.hide('dialog')
@@ -130,7 +129,7 @@
                                 let loader = this.$loading.show({
                                     container: null
                                 })
-                                this.$store.dispatch(UNSUBSCRIBE_ON_EVENT,id)
+                                this.$store.dispatch(`events/${UNSUBSCRIBE_ON_EVENT}`,id)
                                     .then((resp) => {
                                         loader.hide()
                                         this.$modal.hide('dialog')
